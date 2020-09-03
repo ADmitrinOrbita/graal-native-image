@@ -15,7 +15,7 @@
 	<description>Demo project for graalvm native image</description>
 
 	<properties>
-		<java.version>13</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -38,44 +38,49 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
-			<!--  https://repo.spring.io/milestone/org/springframework/experimental/spring-graalvm-native-docs/0.8.0/spring-graalvm-native-docs-0.8.0.zip!/reference/index.html#_spring_graalvm_native-->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<builder>paketobuildpacks/builder:tiny</builder>
-						<env>
-							<BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE>
-							<BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-								-Dspring.native.remove-yaml-support=true
-								-Dspring.spel.ignore=true
-							</BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-						</env>
-					</image>
-				</configuration>
-			</plugin>
+	<profiles>
+		<profile>
+			<id>native</id>
+			<build>
+				<plugins>
+					<!--  https://repo.spring.io/milestone/org/springframework/experimental/spring-graalvm-native-docs/0.8.0/spring-graalvm-native-docs-0.8.0.zip!/reference/index.html#_spring_graalvm_native-->
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<image>
+								<builder>paketobuildpacks/builder:tiny</builder>
+								<env>
+									<BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE>
+									<BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
+										-Dspring.native.remove-yaml-support=true
+										-Dspring.spel.ignore=true
+									</BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
+								</env>
+							</image>
+						</configuration>
+					</plugin>
 
-			<plugin>
-				<groupId>org.graalvm.nativeimage</groupId>
-				<artifactId>native-image-maven-plugin</artifactId>
-				<version>20.2.0</version>
-				<configuration>
-					<mainClass>ru.dmitrin.microservice.graalvm.GraalvmNativeImageApplication</mainClass>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>native-image</goal>
-						</goals>
-						<phase>package</phase>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+					<plugin>
+						<groupId>org.graalvm.nativeimage</groupId>
+						<artifactId>native-image-maven-plugin</artifactId>
+						<version>20.2.0</version>
+						<configuration>
+							<mainClass>ru.dmitrin.microservice.graalvm.GraalvmNativeImageApplication</mainClass>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>native-image</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<repositories>
 		<repository>
