@@ -15,7 +15,7 @@
 	<description>Demo project for graalvm native image</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>13</java.version>
 	</properties>
 
 	<dependencies>
@@ -63,7 +63,7 @@
 				<artifactId>native-image-maven-plugin</artifactId>
 				<version>20.2.0</version>
 				<configuration>
-					<mainClass>ru.dmitrin.microservice.graalvm.graalvm.GraalvmNativeImageApplication</mainClass>
+					<mainClass>ru.dmitrin.microservice.graalvm.GraalvmNativeImageApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

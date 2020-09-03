@@ -1,4 +1,4 @@
-package ru.dmitrin.microservice.graalvm.graalvm;
+package ru.dmitrin.microservice.graalvm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
