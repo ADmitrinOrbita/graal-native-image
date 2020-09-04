@@ -9,3 +9,5 @@ echo %JAVA_HOME%
 
 setx /M PATH "C:\Progra~1\Java\<graalvm>\bin;%PATH%"
 setx /M JAVA_HOME "C:\Progra~1\Java\<graalvm>"
+
+mvn -Pnative clean package
